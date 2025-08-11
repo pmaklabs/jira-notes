@@ -137,6 +137,14 @@
      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${tid}.json`; a.click(); URL.revokeObjectURL(a.href);
    });
      
+     
+     
+     // Add "Insert Date" button
+     panel.querySelector('#jira-notes-actions').insertAdjacentHTML('beforeend', `
+       <button id="jira-notes-insert-date" title="Insert current date">Date</button>
+     `);
+
+     // Save button
      panel.querySelector('#jira-notes-actions').insertAdjacentHTML('beforeend', `
        <button id="jira-notes-save" title="Save now">Save</button>
      `);
@@ -151,6 +159,45 @@
          console.error("[JiraNotes] save error", e);
          alert("Save failed: " + e);
        }
+     });
+     
+     
+     // Helper to insert text at cursor/selection and fire input
+     function insertIntoTextarea(el, text) {
+       const start = el.selectionStart ?? el.value.length;
+       const end   = el.selectionEnd ?? el.value.length;
+
+       const before = el.value.slice(0, start);
+       const after  = el.value.slice(end);
+
+       el.value = before + text + after;
+
+       // move cursor to just after inserted text
+       const pos = start + text.length;
+       el.selectionStart = el.selectionEnd = pos;
+       el.focus();
+
+       // trigger autosave logic that listens to 'input'
+       el.dispatchEvent(new Event('input', { bubbles: true }));
+     }
+
+     // Optional: tweak the format here
+     function formatToday({ withTime = false } = {}) {
+       const d = new Date();
+       const yyyy = d.getFullYear();
+       const mm = String(d.getMonth() + 1).padStart(2, '0');
+       const dd = String(d.getDate()).padStart(2, '0');
+
+       if (!withTime) return `${yyyy}-${mm}-${dd}`;
+
+       const hh = String(d.getHours()).padStart(2, '0');
+       const mi = String(d.getMinutes()).padStart(2, '0');
+       return `${yyyy}-${mm}-${dd} ${hh}:${mi}`;
+     }
+
+     panel.querySelector('#jira-notes-insert-date').addEventListener('click', () => {
+       // change to { withTime: true } if you want date+time
+       insertIntoTextarea(textarea, `\n# ${formatToday({ withTime: true })}\n`);
      });
 
    // Resize

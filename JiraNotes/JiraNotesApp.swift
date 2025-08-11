@@ -323,7 +323,7 @@ final class NotesAppDelegate: NSObject, NSApplicationDelegate {
 
         var info: [NSApplication.AboutPanelOptionKey: Any] = [
             .applicationName: "JiraNotes",
-            .applicationVersion: "1.0.0",
+            .applicationVersion: "1.0.1",
             .version: "10",
             .credits: credits
         ]
