@@ -25,7 +25,18 @@
      }
      #jira-notes-panel{position:fixed;bottom:64px;right:16px;width:360px;height:240px;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:10px;z-index:2147483647;display:none;box-shadow:0 10px 30px rgba(0,0,0,.2);overflow:hidden}
      #jira-notes-header{height:36px;background:#F4F5F7;display:flex;align-items:center;justify-content:space-between;padding:0 10px;border-bottom:1px solid #E1E2E6;user-select:none}
-     #jira-notes-resize{width:14px;height:14px;border:2px solid #7A869A;border-right:none;border-bottom:none;transform:rotate(45deg);cursor:nwse-resize;margin-right:auto}
+     #jira-notes-resize {
+       width: 10px;                 /* smaller overall size */
+       height: 10px;
+       border-top: 2px solid #7A869A;  /* horizontal line */
+       border-left: 2px solid #7A869A; /* vertical line */
+       cursor: nwse-resize;
+       margin-right: auto;
+       box-sizing: border-box;      /* keep lines aligned to the edge */
+     }
+     #jira-notes-resize:hover {
+       border-color: #0052CC;       /* change color on hover */
+     }
      #jira-notes-actions{display:flex;gap:8px}
      #jira-notes-choose,#jira-notes-export{background:transparent;border:none;color:#0052CC;cursor:pointer}
      #jira-notes-text{width:100%;height:calc(100% - 36px);border:none;outline:none;padding:10px;font:13px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;resize:none;box-sizing:border-box}
@@ -105,7 +116,7 @@
            dot = document.createElement('div');
            dot.id = 'jira-notes-statusdot';
            dot.style.cssText = 'width:10px;height:10px;border-radius:50%;margin-left:8px;background:#aaa;';
-           header.insertBefore(dot, header.firstChild);
+           header.appendChild(dot)
          }
 
          // ping via background
