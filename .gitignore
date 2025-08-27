@@ -1,0 +1,84 @@
+# --- macOS cruft
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# --- Xcode build products & user state
+DerivedData/
+build/
+*.moved-aside
+*.xccheckout
+*.xcuserstate
+*.xcscmblueprint
+# Per-user settings (keep shared ones)
+**/*.xcodeproj/xcuserdata/
+**/*.xcworkspace/xcuserdata/
+
+# --- Keep shared schemes & project files (tracked)
+!**/*.xcodeproj/project.pbxproj
+!**/*.xcodeproj/xcshareddata/**
+!**/*.xcworkspace/contents.xcworkspacedata
+!**/*.xcworkspace/xcshareddata/**
+
+# --- Swift Package Manager
+.build/
+.swiftpm/
+# Keep dependency lock for reproducible builds
+!Package.resolved
+
+# --- Archives & symbols
+*.ipa
+*.xcarchive
+*.dSYM
+*.dSYM.zip
+
+# --- Logs
+*.log
+*.trace
+*.crash
+
+# --- Fastlane (optional noise)
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/test_output
+!fastlane/Fastfile
+!fastlane/Appfile
+
+# --- Safari Web Extension: JS toolchains (if you bundle the extension)
+# (Uncomment if you use Node/webpack/vite to build the extension)
+node_modules/
+.pnpm-store/
+.parcel-cache/
+.vite/
+dist/
+build/
+out/
+*.map
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+# Lockfiles should be tracked (pick ONE depending on your manager)
+#!package-lock.json
+#!yarn.lock
+#!pnpm-lock.yaml
+
+# --- web-ext / converter artifacts (when using Mozilla tooling or converter)
+web-ext-artifacts/
+Converted*/
+# If your pipeline emits a temporary copied extension folder, ignore it:
+# ExtensionCompiled/
+# WebExtensionBuild/
+
+# --- Environment files (if you keep local dev toggles)
+.env
+.env.*
+!.env.example
+
+# --- Carthage / CocoaPods (only if you use them)
+Carthage/Build/
+!Cartfile
+!Cartfile.resolved
+Pods/
+!Podfile
+!Podfile.lock
+
